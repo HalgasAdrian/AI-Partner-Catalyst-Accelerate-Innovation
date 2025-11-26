@@ -1,0 +1,19 @@
+{
+  "name": "self-debugging-coding-assistant",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Front‑end for the Self‑Debugging Coding Assistant hackathon project",
+  "scripts": {
+    "start": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "@vitejs/plugin-react": "^5.0.0"
+  }
+}

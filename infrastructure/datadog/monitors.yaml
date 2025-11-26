@@ -1,0 +1,21 @@
+# Datadog monitor definitions for the Self‑Debugging Coding Assistant.
+#
+# Use the Datadog API or UI to import these monitors.  Each monitor should
+# correspond to a detection rule mentioned in the report:
+#  - RED metrics: alert on high error rates or long durations【814637305327347†L536-L553】.
+#  - Token usage anomalies: alert when token count per iteration exceeds a threshold.
+#  - Iteration count: alert when the assistant exceeds `MAX_ITERATIONS`.
+
+# Example monitor (commented out):
+#
+# - type: metric alert
+#   query: "max(last_5m):trace.ai_service.iterations{service:self-debug-assistant} > 5"
+#   name: "Self‑Debugging Assistant – Excessive iterations"
+#   message: |
+#     The assistant has attempted more than 5 iterations for a single request.
+#     The task may be ambiguous or the model may be stuck in a loop.  Investigate
+#     the prompt and consider switching models or adjusting the prompt.
+#   tags:
+#     - app:self-debug-assistant
+#   options:
+#     escalation_message: "Iteration limit reached for self‑debugging assistant"

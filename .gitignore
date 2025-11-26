@@ -1,0 +1,21 @@
+# Ignore Python cache and environment files
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+env/
+venv/
+.env
+
+# Ignore Node modules
+frontend/node_modules/
+
+# Ignore Terraform state and plan files
+*.tfstate
+*.tfstate.backup
+.terraform/
+
+# Ignore VS Code settings and local logs
+.vscode/
+logs/
+*.log

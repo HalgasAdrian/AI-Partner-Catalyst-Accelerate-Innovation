@@ -1,0 +1,10 @@
+# Python dependencies for the Self‑Debugging Coding Assistant
+fastapi            # web framework for the API server
+uvicorn            # ASGI server to run FastAPI
+google-cloud-aiplatform  # Vertex AI SDK for interacting with LLMs
+google-auth        # authentication for GCP APIs
+datadog            # Datadog API client for events and metrics
+ddtrace            # Datadog tracing library
+pytest             # unit testing framework (optional)
+python-dotenv      # load environment variables from .env file
+requests           # HTTP client (if needed)

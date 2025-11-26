@@ -1,0 +1,20 @@
+{
+  "title": "Self‑Debugging Coding Assistant Dashboard",
+  "description": "A dashboard that surfaces key health metrics for the LLM‑powered coding assistant.  Import this JSON into Datadog to create the dashboard.",
+  "widgets": [
+    /*
+      Define widgets here.  Suggested visualizations:
+        - A timeseries graph of RED metrics (request rate, errors, duration) for your backend【814637305327347†L536-L553】.
+        - A heatmap or bar chart of token usage and cost per request【769973766559025†L487-L518】.
+        - A list or table of recent incidents, with links to logs and traces.
+        - Gauges for CPU and memory utilization of the sandbox environment【814637305327347†L536-L553】.
+    */
+  ],
+  "template_variables": [
+    {
+      "name": "service",
+      "prefix": "service",
+      "default": "self-debug-assistant"
+    }
+  ]
+}

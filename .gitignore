@@ -6,7 +6,7 @@ __pycache__/
 env/
 venv/
 .env
-hackathon1
+hackathon1/
 
 # Ignore Node modules
 frontend/node_modules/

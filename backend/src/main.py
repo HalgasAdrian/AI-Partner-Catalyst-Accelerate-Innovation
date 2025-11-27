@@ -1,3 +1,6 @@
+from typing import Union
+from fastapi import FastAPI
+
 """Entry point for the backend API server.
 
 This module defines the HTTP API that the front‑end will interact with.  Use a framework like
@@ -15,9 +18,24 @@ Note: this file intentionally contains no executable code; you will need to fill
 during implementation.
 """
 
-def placeholder():
-    """A placeholder function to satisfy the interpreter.
+app = FastAPI()
 
-    Remove this function and implement your API endpoints in your framework of choice.
-    """
-    return None
+@app.post("/generate")
+def generate_code(prompt: str, tests: Union[list[str], None] = None):
+    """Endpoint to generate and self-debug code based on a user prompt.
+
+    Arguments:
+        prompt:  The natural language description of the desired code.
+        tests:   Optional list of test case definitions that validate the code."""
+
+@app.get("/result/{session_id}")
+def get_result(session_id: str):
+    """Endpoint to retrieve the result of a self-debugging session.
+
+    Arguments:
+        session_id:  The unique identifier for the coding session."""
+
+@app.get("/healthz")
+def health_check():
+    """Health check endpoint to verify the service is running."""
+    return {"status": "ok"}

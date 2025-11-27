@@ -1,10 +1,7 @@
-from typing import Union
-from fastapi import FastAPI
+"""
+Entry point for the backend API server.
 
-"""Entry point for the backend API server.
-
-This module defines the HTTP API that the front‑end will interact with.  Use a framework like
-FastAPI or Flask to expose endpoints for:
+This module defines the HTTP API that the frontend will interact with. Using the FastAPI framework, it should expose endpoints for:
 
 * Submitting a coding prompt and optional test cases.
 * Returning the generated code, test results, and any error messages.
@@ -12,13 +9,15 @@ FastAPI or Flask to expose endpoints for:
 
 The implementation should orchestrate calls to the LLM client (for code generation and
 analysis) and the code execution sandbox.  It should also integrate Datadog for tracing
-and metrics.  See `ai_service/app.py` for the core logic.
-
-Note: this file intentionally contains no executable code; you will need to fill it in
-during implementation.
+and metrics. See `ai_service/app.py` for the core logic.
 """
 
+from typing import Union
+from fastapi import FastAPI
+from routes import router
+
 app = FastAPI()
+app.include_router(router)
 
 @app.post("/generate")
 def generate_code(prompt: str, tests: Union[list[str], None] = None):

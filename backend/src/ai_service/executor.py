@@ -1,50 +1,63 @@
-"""Code execution logic for the self‑debugging assistant.
+"""
+Code execution logic for the self-debugging assistant.
 
 This module is responsible for running generated code in an isolated sandbox
-environment and capturing output or errors.  There are several ways to
-implement a sandbox:
+and capturing output or errors.
 
-* Use Google Cloud Functions or Cloud Run with appropriate sandboxing to execute
-  arbitrary Python code.  Each request can spawn a new container or use a
-  persistent sandbox (for example, via the Agent Engine Code Execution tool).
-* Use the Google Cloud Agent Engine code execution tool to create a
-  stateful sandbox (see the official documentation).  It maintains a single
-  environment across calls and isolates execution for security【756926928666265†L212-L239】.
+Sandbox options:
+- Google Cloud Functions or Cloud Run (stateless)
+- Google Cloud Agent Engine (stateful and persistent)
 
-Your functions might include:
-
-* `execute_code(code: str) -> tuple[str, str]`: Run the supplied code and
-  return its standard output and any error messages.
-* `cleanup() -> None`: Clean up any sandbox resources when the session ends.
-
-Make sure to capture metrics about execution time, memory usage and error
-occurrences, and forward them to Datadog via the telemetry utilities.
-
-The implementation here is omitted; add the integration with your chosen
-sandbox method when you build the project.
+Each request sends code to be run in a container and returns output/error.
 """
 
+import time
+from typing import Tuple
+
+# from telemetry import send_execution_metrics  # Optional: for Datadog
+
+
 class CodeExecutor:
-    """Interface for executing code in an isolated environment."""
+    """Executes Python code in a secure, isolated environment (or stubbed locally)."""
 
     def __init__(self, sandbox_name: str | None = None):
         self.sandbox_name = sandbox_name
 
-    def execute_code(self, code: str) -> tuple[str, str]:
-        """Execute code in the sandbox and return (stdout, stderr).
-
-        Replace this stub with logic to send the code to your sandbox (e.g., a
-        Cloud Function, Cloud Run service or Agent Engine sandbox) and capture
-        the results.  Remember to handle timeouts, resource limits and any
-        security considerations.
+    def execute_code(self, code: str, tests: list[str] | None = None) -> Tuple[str, str]:
         """
-        raise NotImplementedError
+        Runs Python code in an isolated sandbox. Returns (stdout, stderr).
+        This version is a stub; integrate your actual execution logic here.
+
+        Parameters:
+        - code: the code string to execute
+        - tests: optional list of test case strings to append to the code
+
+        Returns:
+        - stdout (str): printed output
+        - stderr (str): any error messages
+        """
+
+        start_time = time.time()
+
+        # Combine code and tests (if provided)
+        full_code = code
+        if tests:
+            full_code += "\n\n" + "\n".join(tests)
+
+        # Placeholder: replace with Cloud Run or Agent Engine call
+        stdout = ""
+        stderr = "Code execution not yet implemented."
+
+        # Track duration (for metrics later)
+        duration = time.time() - start_time
+
+        # Optional: emit to Datadog
+        # send_execution_metrics(duration=duration, error=bool(stderr), sandbox=self.sandbox_name)
+
+        return stdout, stderr
 
     def cleanup(self) -> None:
-        """Clean up sandbox resources when the session is complete.
-
-        Implement this method to delete or reset the sandbox.  If you are using
-        a persistent sandbox with Agent Engine, you might rely on the TTL to
-        expire it automatically【756926928666265†L274-L291】.
         """
-        return None
+        Cleans up resources (if applicable). For stateless sandboxes this may do nothing.
+        """
+        return
